@@ -5,7 +5,7 @@ Using this for personal projects not ment to be used for production stuff.
 
 ## Fetch
 
-The recommended way to install Backlight is [through composer](http://packagist.org).
+The recommended way to install is [through composer](http://packagist.org).
 
 Just create a composer.json file for your project:
 
@@ -22,13 +22,6 @@ And run these two commands to install it:
 
     $ curl -s http://getcomposer.org/installer | php
     $ php composer.phar install
-
-Now you can add the autoloader, and you will have access to the library:
-
-```php
-<?php
-require 'vendor/autoload.php';
-```
 
 ## Requirements
 
