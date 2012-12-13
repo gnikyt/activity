@@ -6,13 +6,15 @@ class Broadcast
 {
     protected $redis,
               $activity,
-              $to;
+              $to,
+              $key;
 
-    public function __construct(\Predis\Client $redis)
+    public function __construct(\Predis\Client $redis, $key = 'feed')
     {
         $this->redis    = $redis;
         $this->activity = null;
         $this->to       = [];
+        $this->key      = $key;
 
         return $this;
     }
@@ -46,7 +48,7 @@ class Broadcast
         $to   = $this->to;
 
         foreach ($to as $user) {
-            $this->redis->zadd("feed:{$user}", $time, $json);
+            $this->redis->zadd("{$this->key}:{$user}", $time, $json);
         }
     }
 }

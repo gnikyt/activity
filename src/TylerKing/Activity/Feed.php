@@ -7,11 +7,13 @@ class Feed
     const COUNT = 100;
 
     protected $redis,
-              $uid;
+              $uid,
+              $key;
 
-    public function __construct(\Predis\Client $redis)
+    public function __construct(\Predis\Client $redis, $key = 'feed')
     {
         $this->redis = $redis;
+        $this->key   = $key;
 
         return $this;
     }
@@ -23,7 +25,7 @@ class Feed
 
     public function get($count = self::COUNT)
     {
-        $results = $this->redis->zrevrange("feed:{$this->uid}", 0, $count);
+        $results = $this->redis->zrevrange("{$this->key}:{$this->uid}", 0, $count);
         if ($results) {
             $results = array_map(function($result) {
                 $item = json_decode($result);
@@ -42,7 +44,7 @@ class Feed
 
     public function getJson($count = self::COUNT)
     {
-        $results = $this->redis->zrevrange("feed:{$this->uid}", 0, $count);
+        $results = $this->redis->zrevrange("{$this->key}:{$this->uid}", 0, $count);
         if ($results) {
             array_walk($results, function(&$key, $value) {
                 $key = json_decode($key);
@@ -56,12 +58,12 @@ class Feed
 
     public function count()
     {
-        return (int) $this->redis->zcount("feed:{$this->uid}", '-inf', '+inf');
+        return (int) $this->redis->zcount("{$this->key}:{$this->uid}", '-inf', '+inf');
     }
 
     public function trim($index = self::COUNT)
     {
-        $key        = "feed:{$this->uid}";
+        $key        = "{$this->key}:{$this->uid}";
         $last_index = $this->redis->zcard($key);
 
         if ($last_index >= $index) {
