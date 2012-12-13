@@ -1,0 +1,22 @@
+{
+    "name": "tyler-king/activity",
+    "type": "library",
+    "description": "A simple Predis activity feed handler for my projects.",
+    "keywords": ["activity", "redis"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tyler King",
+            "email": "tyler.king@newfie.co"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "predis/predis": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "TylerKing\\Activity": "src"
+        }
+    }
+}
