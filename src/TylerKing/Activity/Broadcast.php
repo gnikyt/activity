@@ -34,6 +34,8 @@ class Broadcast
     public function setTo(array $to)
     {
         $this->to = $to;
+
+        return $this;
     }
 
     public function getTo()
@@ -50,5 +52,7 @@ class Broadcast
         foreach ($to as $user) {
             $this->redis->zadd("{$this->key}:{$user}", $time, $json);
         }
+
+        return $this;
     }
 }

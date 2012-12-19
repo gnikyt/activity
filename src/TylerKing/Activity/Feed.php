@@ -21,6 +21,8 @@ class Feed
     public function setUser($uid)
     {
         $this->uid = (int) $uid;
+
+        return $this;
     }
 
     public function get($count = self::COUNT)
@@ -75,5 +77,7 @@ class Feed
                 $this->redis->zremrangebyscore($key, '-inf', "({$score}");
             }
         }
+
+        return $this;
     }
 }
