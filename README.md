@@ -1,6 +1,7 @@
 # Activity
 
-A simple activity feed handler using Predis which stores/pushes JSON objects to friends/followers.
+A simple activity feed handler using Predis which stores/pushes JSON objects to friends/followers, can even be used for
+simple notifications.
 Using this for personal projects not ment to be used for production stuff.
 
 ## Fetch
